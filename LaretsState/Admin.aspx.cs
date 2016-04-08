@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,60 +12,78 @@ namespace LaretsState
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Application["actualState"] == null)
+            { Application["actualState"] = state.Instance; }
+
+            state actualState = (state)Application.Get("actualState");
+
+            if (actualState.getActualState() == serviseState.OnService)
+            { StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
+            else
+            {
+                StateLabel.Text = "Все работает штатно.";
+                serviseRecord next = actualState.getNextRecord();
+                if (next != null)
+                { PlanLabel.Text = "На " + next.serviceStart.ToString("dd.mm.yyyy") + " запланированы работы."; }
+                else
+                { PlanLabel.Text = "Работы по обновлению не ведутся."; }
+            }
+
             NextDate.SelectedDate = DateTime.Now.Date;
             NextTime.Text = DateTime.Now.ToString("HH:mm");
+            MultiView.ActiveViewIndex = 0;
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void PlanButton_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
-            // todo
-            LabelOutput.Text = "Запись сохранена.";
-        }
 
-        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
-        {
             DateTime selected = NextDate.SelectedDate;
-            var time = NextTime.Text.Split('\u0058');
+            string[] time = NextTime.Text.Split(':');
+
+            TimeSpan duration;
+            try
+            { duration = new TimeSpan(int.Parse(time[0]), int.Parse(time[1]), 0); }
+            catch
+            { PlanStatus.Text = "Ошибка создания даты"; return; }
+
+            if (selected < DateTime.Now)
+            { PlanStatus.Text = "Выбранная плановая дата раньше сегодняшней"; return; }
+
+
+            state actualState = (state)Application.Get("actualState");
             try
             {
-                selected.Add(new TimeSpan(int.Parse(time[0]), int.Parse(time[1]), 0));
+                actualState.addRecord(new serviseRecord(selected, duration));
+                PlanStatus.Text = "Запись сохранена";
             }
-            catch  { args.IsValid = false; return; }
-
-            if (selected > DateTime.Now)
-            { args.IsValid = true; }
-            else
-            { args.IsValid = false; }
+            catch (Exception ex)
+            { PlanStatus.Text = ex.Message; }
+            
         }
 
-        protected void CustomValidator2_ServerValidate(object source, ServerValidateEventArgs args)
+
+        protected void PlanLinkButton_Click(object sender, EventArgs e)
         {
-            DateTime selected = NextDate.SelectedDate;
-            var time = NextTime.Text.Split('\u0058');
-            try
-            {
-                selected.Add(new TimeSpan(int.Parse(time[0]), int.Parse(time[1]), 0));
-            }
-            catch { args.IsValid = false; return; }
-
-            //todo
-            args.IsValid = true;
+            MultiView.ActiveViewIndex = 0;
         }
 
-        protected void LinkButton1_Click(object sender, EventArgs e)
+        protected void ShowAllLinkButton_Click(object sender, EventArgs e)
         {
-            MultiView1.ActiveViewIndex = 0;
+            MultiView.ActiveViewIndex = 1;
         }
 
-        protected void LinkButton2_Click(object sender, EventArgs e)
+        protected void UpdateLinkButton_Click(object sender, EventArgs e)
         {
-            MultiView1.ActiveViewIndex = 1;
+            MultiView.ActiveViewIndex = 2;
         }
 
-        protected void LinkButton3_Click(object sender, EventArgs e)
+        protected void LogOutLinkButton_Click(object sender, EventArgs e)
         {
-            MultiView1.ActiveViewIndex = 2;
+
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
         }
+
     }
 }

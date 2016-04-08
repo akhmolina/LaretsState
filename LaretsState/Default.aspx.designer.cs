@@ -22,21 +22,30 @@ namespace LaretsState {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// StateLabel1 элемент управления.
+        /// StatePanel элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label StateLabel1;
+        protected global::System.Web.UI.WebControls.Panel StatePanel;
         
         /// <summary>
-        /// StateLabel2 элемент управления.
+        /// StateLabel элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label StateLabel2;
+        protected global::System.Web.UI.WebControls.Label StateLabel;
+        
+        /// <summary>
+        /// PlanLabel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PlanLabel;
     }
 }

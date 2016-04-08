@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace LaretsState
 {
@@ -11,11 +6,21 @@ namespace LaretsState
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            state actualState = (state)Application.Get("actualState");
 
+            if (actualState != null && actualState.getActualState() == serviseState.OnService)
+            {StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
+            else
+            {
+                StateLabel.Text = "Все работает штатно.";
+                serviseRecord next = null;
+                if (actualState != null) next = actualState.getNextRecord();
 
-            state actualState = state.Instance;
-            StateLabel1.Text = actualState.actualState.ToString();
-            StateLabel2.Text = actualState.nextService.ToShortDateString();
+                if ( next!= null)
+                {PlanLabel.Text = "На " + next.serviceStart.ToString("dd.mm.yyyy") + " запланированы работы."; }
+                else
+                { PlanLabel.Text = "Работы по обновлению не ведутся."; }
+            }
         }
     }
 }

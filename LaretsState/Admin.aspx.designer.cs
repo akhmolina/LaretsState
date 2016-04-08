@@ -22,76 +22,112 @@ namespace LaretsState {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// StateLabel1 элемент управления.
+        /// StatePanel элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label StateLabel1;
+        protected global::System.Web.UI.WebControls.Panel StatePanel;
         
         /// <summary>
-        /// StateLabel2 элемент управления.
+        /// StateLabel элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label StateLabel2;
+        protected global::System.Web.UI.WebControls.Label StateLabel;
         
         /// <summary>
-        /// LinkButton1 элемент управления.
+        /// PlanLabel элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.Label PlanLabel;
         
         /// <summary>
-        /// LinkButton2 элемент управления.
+        /// NavigationPanel элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.WebControls.Panel NavigationPanel;
         
         /// <summary>
-        /// LinkButton3 элемент управления.
+        /// PlanLinkButton элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
+        protected global::System.Web.UI.WebControls.LinkButton PlanLinkButton;
         
         /// <summary>
-        /// MultiView1 элемент управления.
+        /// ShowAllLinkButton элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView MultiView1;
+        protected global::System.Web.UI.WebControls.LinkButton ShowAllLinkButton;
         
         /// <summary>
-        /// View1 элемент управления.
+        /// UpdateLinkButton элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View View1;
+        protected global::System.Web.UI.WebControls.LinkButton UpdateLinkButton;
         
         /// <summary>
-        /// ValidationSummary1 элемент управления.
+        /// LogOutLinkButton элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.WebControls.LinkButton LogOutLinkButton;
+        
+        /// <summary>
+        /// MultiView элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView MultiView;
+        
+        /// <summary>
+        /// PlanView элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View PlanView;
+        
+        /// <summary>
+        /// MainPanel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel MainPanel;
+        
+        /// <summary>
+        /// ValidationSummary элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
         
         /// <summary>
         /// NextDate элемент управления.
@@ -112,31 +148,22 @@ namespace LaretsState {
         protected global::System.Web.UI.WebControls.TextBox NextTime;
         
         /// <summary>
-        /// RequiredFieldValidator2 элемент управления.
+        /// NextTimeRequiredFieldValidator элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator NextTimeRequiredFieldValidator;
         
         /// <summary>
-        /// RegularExpressionValidator2 элемент управления.
+        /// NextTimeRegularExpressionValidator элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
-        
-        /// <summary>
-        /// CustomValidator1 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator NextTimeRegularExpressionValidator;
         
         /// <summary>
         /// Duration элемент управления.
@@ -148,22 +175,22 @@ namespace LaretsState {
         protected global::System.Web.UI.WebControls.TextBox Duration;
         
         /// <summary>
-        /// RegularExpressionValidator1 элемент управления.
+        /// DurationRegularExpressionValidator элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator DurationRegularExpressionValidator;
         
         /// <summary>
-        /// RangeValidator1 элемент управления.
+        /// DurationRangeValidator элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator1;
+        protected global::System.Web.UI.WebControls.RangeValidator DurationRangeValidator;
         
         /// <summary>
         /// PlanButton элемент управления.
@@ -175,39 +202,30 @@ namespace LaretsState {
         protected global::System.Web.UI.WebControls.Button PlanButton;
         
         /// <summary>
-        /// CustomValidator2 элемент управления.
+        /// PlanStatus элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator2;
+        protected global::System.Web.UI.WebControls.Label PlanStatus;
         
         /// <summary>
-        /// LabelOutput элемент управления.
+        /// ShowAllView элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelOutput;
+        protected global::System.Web.UI.WebControls.View ShowAllView;
         
         /// <summary>
-        /// View2 элемент управления.
+        /// UpdateView элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View View2;
-        
-        /// <summary>
-        /// View3 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.View View3;
+        protected global::System.Web.UI.WebControls.View UpdateView;
     }
 }

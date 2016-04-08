@@ -5,97 +5,112 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Администрирование регламентных работ на сервисе Ларец</title>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <h1>Текущее состояние сервиса "Ларец":</h1>
+     <asp:Panel ID="StatePanel" runat="server" Width="800px"  Wrap="False" CssClass="">
+        <div style="text-align: center">
+            <h1>Текущее состояние сервиса "Ларец"</h1>
 
-        <asp:Label ID="StateLabel1" runat="server" OnDataBinding="Page_Load"></asp:Label>
-        <br />
-        <asp:Label ID="StateLabel2" runat="server" OnDataBinding="Page_Load"></asp:Label>
-    
-    </div>
-    
-    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Запланировать очередное обслуживание</asp:LinkButton>
-    <br />
-    <asp:LinkButton ID="LinkButton2" runat="server" OnClick="LinkButton2_Click">Посмотреть все запланированные работы</asp:LinkButton>
-    <br />
-    <asp:LinkButton ID="LinkButton3" runat="server" OnClick="LinkButton3_Click">Изменить запланированные работы</asp:LinkButton>
-    <br />
-
-    <asp:MultiView ID="MultiView1" runat="server">  
-        <asp:View ID="View1" runat="server">
-            <h1>Запланировать очередное обслуживание</h1>
-
-            <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor ="Red" />
-            Дата и время начала обслуживания:&nbsp; 
+            <asp:Label ID="StateLabel" runat="server" OnDataBinding="Page_Load"></asp:Label>
             <br />
-            <table >
-                <tr>
-                    <td>
-                        <asp:Calendar ID="NextDate" runat="server"
-                        ></asp:Calendar>
-                        <%-- как быть без validation group? --%>
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                        ControlToValidate="NextDate" 
-                        ErrorMessage="*" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>--%>
-                    </td>
+            <asp:Label ID="PlanLabel" runat="server" OnDataBinding="Page_Load"></asp:Label>
+        </div>
+    </asp:Panel>
+    <br />
+    <asp:Panel ID="NavigationPanel" runat="server" Width="800px"  Wrap="False" CssClass="">
+        <table style="text-align: center">
+            <tr>
+                <td style="width:25%; vertical-align:top">
+                    <asp:LinkButton ID="PlanLinkButton" runat="server" OnClick="PlanLinkButton_Click">Запланировать очередное обслуживание</asp:LinkButton>
+                </td>
+                <td style="width:25%; vertical-align:top">
+                    <asp:LinkButton ID="ShowAllLinkButton" runat="server" OnClick="ShowAllLinkButton_Click">Посмотреть все запланированные работы</asp:LinkButton>
+                </td >
+                <td style="width:25%; vertical-align:top">
+                    <asp:LinkButton ID="UpdateLinkButton" runat="server" OnClick="UpdateLinkButton_Click">Изменить запланированные работы</asp:LinkButton>
+                </td>
+                <td style="width:25%; vertical-align:top">
+                    <asp:LinkButton ID="LogOutLinkButton" runat="server" OnClick="LogOutLinkButton_Click">Выйти из системы</asp:LinkButton>
+                </td>
+            </tr>
+        </table>
+    </asp:Panel>
+    <br />
+    <asp:MultiView ID="MultiView" runat="server">  
+        <asp:View ID="PlanView" runat="server" >
+            <asp:Panel ID="MainPanel" runat="server" Width="800px"  Wrap="False" CssClass="">
                 
-                    <td>
-                        <asp:TextBox ID="NextTime" runat="server" Text="0:00"
-                            ValidationGroup="PlanValidationGroup" Width="52px"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                        ControlToValidate="NextTime" Text="*"
-                        ErrorMessage="Укажите время." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
-                            ControlToValidate="NextTime" 
-                            Display="Dynamic" ForeColor="Red" ValidationExpression="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
-                            ErrorMessage="Неверный формат времени. Введите время в формате hh:mm или h:mm"></asp:RegularExpressionValidator>
+                <h1 style="text-align: center">Запланировать очередное обслуживание</h1>
 
-                    </td>
-                </tr>    
-            </table>
-        
-            <asp:CustomValidator ID="CustomValidator1" runat="server" 
-                ErrorMessage="Дата должна быть не раньше текущей." 
-                ServerValidationFunction ="SelectedDateLaterThenNow_ServerValidate"
-                Display="Dynamic"  ForeColor="Red" ></asp:CustomValidator>
-            <br />
+                <asp:ValidationSummary ID="ValidationSummary" runat="server" ForeColor ="Red" />
 
-            Продолжительность обслуживания (мин): 
-            <asp:TextBox ID="Duration" runat="server"
-                Text ="30" Width="21px" ValidationGroup="PlanValidationGroup"></asp:TextBox>
+                <table style="width:100%" border="0">
+                    <tr>
+                        <td style="height: 200px; width:30%; vertical-align:top">
+                            Дата начала обслуживания:
+                        </td>
+                        <td style="height: 200px; width:70%; vertical-align:top " >
+                            <asp:Calendar ID="NextDate" runat="server"
+                            ></asp:Calendar>
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td style="height: 50px; width:30%; vertical-align:top">
+                            Время начала обслуживания:
+                        </td>
+                        <td style="height: 50px; width:70%; vertical-align:top ">
+                            <asp:TextBox ID="NextTime" runat="server" Text="0:00"
+                                ValidationGroup="PlanValidationGroup" Width="50px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="NextTimeRequiredFieldValidator" runat="server" 
+                            ControlToValidate="NextTime" Text="*"
+                            ErrorMessage="Укажите время" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <br />
+                            <asp:RegularExpressionValidator ID="NextTimeRegularExpressionValidator" runat="server"
+                                ControlToValidate="NextTime" 
+                                Display="Dynamic" ForeColor="Red" ValidationExpression="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+                                ErrorMessage="Введите время в формате hh:mm или h:mm"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td style="height: 50px; width:30%; vertical-align:top">
+                            Продолжительность обслуживания (мин): 
+                        </td>
+                        <td style="height: 50px; width:70%; vertical-align:top ">
+                            <asp:TextBox ID="Duration" runat="server"
+                                Text ="30" Width="21px" ValidationGroup="PlanValidationGroup"></asp:TextBox>
 
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                ControlToValidate="Duration" Display="Dynamic"
-                ErrorMessage="&nbsp;Продолжительность обслуживания должна быть числом." 
-                ValidationExpression="^[0-9]+$" ForeColor="Red"></asp:RegularExpressionValidator>
-            <asp:RangeValidator ID="RangeValidator1" runat="server" 
-                ControlToValidate="Duration" ErrorMessage="&nbsp;Недопустимая продолжительность обслуживания."
-                Display="Dynamic"  ForeColor="Red" MaximumValue="90" MinimumValue="30"></asp:RangeValidator>
+                            <br />
 
-            <br />
-            <br />
-        
-            <asp:Button ID="PlanButton" runat="server" Text="Запланировать" OnClick="Button1_Click"/>
-            <br />
-            <br />
-            <asp:CustomValidator ID="CustomValidator2" runat="server" ValidationGroup="PlanValidationGroup"
-                Display="Dynamic" ForeColor="Red"
-                ErrorMessage="В указанный промежуток времени уже запланированы работы."
-                ServerValidationFunction ="SelectedDateOlreadyExist_ServerValidate" OnServerValidate="CustomValidator2_ServerValidate"></asp:CustomValidator>
-            <br />
-            <br />
-            <asp:Label ID="LabelOutput" runat="server" Text=""></asp:Label>
+                            <asp:RegularExpressionValidator ID="DurationRegularExpressionValidator" runat="server"
+                                ControlToValidate="Duration" Display="Dynamic"
+                                ErrorMessage="Продолжительность обслуживания должна быть числом" 
+                                ValidationExpression="^[0-9]+$" ForeColor="Red"></asp:RegularExpressionValidator>
+                        
+                            <asp:RangeValidator ID="DurationRangeValidator" runat="server" 
+                                ControlToValidate="Duration" ErrorMessage="Допустимая продолжительность обслуживания от 30 до 90 минут"
+                                Display="Dynamic"  ForeColor="Red" MaximumValue="90" MinimumValue="30"></asp:RangeValidator>
+                            <br />
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <div style="text-align: center">
+                    <asp:Button ID="PlanButton" runat="server" Text="Запланировать" OnClick="PlanButton_Click"/>           
+                    <br />
+                    <asp:Label ID="PlanStatus" runat="server" Text=""></asp:Label>
+                </div>
+            
+            </asp:Panel>
         </asp:View>
-        <asp:View ID="View2" runat="server">
-            <h1>Посмотреть все запланированные работы</h1>
+
+        <asp:View ID="ShowAllView" runat="server">
+            <h1 style="text-align: center">Посмотреть все запланированные работы</h1>
     
         </asp:View>
-        <asp:View ID="View3" runat="server">
-            <h1>Изменить запланированные работы</h1>
+        <asp:View ID="UpdateView" runat="server">
+            <h1 style="text-align: center">Изменить запланированные работы</h1>
     
         </asp:View>
     </asp:MultiView>
