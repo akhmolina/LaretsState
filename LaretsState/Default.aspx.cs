@@ -8,12 +8,12 @@ namespace LaretsState
         {
             state actualState = (state)Application.Get("actualState");
 
-            if (actualState != null && actualState.getActualState() == serviseState.OnService)
+            if (actualState != null && actualState.getActualState() == serviceState.OnService)
             {StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
             else
             {
                 StateLabel.Text = "Все работает штатно.";
-                serviseRecord next = null;
+                serviceRecord next = null;
                 if (actualState != null) next = actualState.getNextRecord();
 
                 if ( next!= null)

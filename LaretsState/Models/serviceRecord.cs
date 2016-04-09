@@ -5,17 +5,21 @@ using System.Web;
 
 namespace LaretsState
 {
-    public class serviseRecord
+    public class serviceRecord
     {
+        private static int lastid = 0;
+
         public readonly DateTime serviceStart;
         public readonly TimeSpan serviceDuration;
-        public readonly DateTime created;
+        public readonly DateTime creationTime;
+        public readonly int id;
         
-        public serviseRecord (DateTime ServiceStart, TimeSpan ServiceDuration)
+        public serviceRecord (DateTime ServiceStart, TimeSpan ServiceDuration)
         {
             serviceStart = ServiceStart;
             serviceDuration = ServiceDuration;
-            created = DateTime.Now;
+            creationTime = DateTime.Now;
+            this.id = ++lastid;
         }
     }
 }

@@ -17,12 +17,12 @@ namespace LaretsState
 
             state actualState = (state)Application.Get("actualState");
 
-            if (actualState.getActualState() == serviseState.OnService)
+            if (actualState.getActualState() == serviceState.OnService)
             { StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
             else
             {
                 StateLabel.Text = "Все работает штатно.";
-                serviseRecord next = actualState.getNextRecord();
+                serviceRecord next = actualState.getNextRecord();
                 if (next != null)
                 { PlanLabel.Text = "На " + next.serviceStart.ToString("dd.mm.yyyy") + " запланированы работы."; }
                 else
@@ -54,7 +54,7 @@ namespace LaretsState
             state actualState = (state)Application.Get("actualState");
             try
             {
-                actualState.addRecord(new serviseRecord(selected, duration));
+                actualState.addRecord(new serviceRecord(selected, duration));
                 PlanStatus.Text = "Запись сохранена";
             }
             catch (Exception ex)

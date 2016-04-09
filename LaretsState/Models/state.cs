@@ -18,8 +18,8 @@ namespace LaretsState
         }
 
 
-        private List<serviseRecord> _plan = new List<serviseRecord>();
-        public List<serviseRecord> plan
+        private List<serviceRecord> _plan = new List<serviceRecord>();
+        public List<serviceRecord> plan
         {
             get { return _plan; }
             private set { if (_plan != value) _plan = value; }
@@ -27,7 +27,7 @@ namespace LaretsState
 
         private state() { }
 
-        internal void updateRecord(serviseRecord oldRecord, serviseRecord newRecord)
+        internal void updateRecord(serviceRecord oldRecord, serviceRecord newRecord)
         {
             lock (plan)
             {
@@ -42,12 +42,12 @@ namespace LaretsState
             }
         }
 
-        internal void deliteRecord(serviseRecord record)
+        internal void deliteRecord(serviceRecord record)
         {
             plan.Remove(record);
         }
 
-        internal void addRecord(serviseRecord record)
+        internal void addRecord(serviceRecord record)
         {
             lock (plan)
             {
@@ -60,13 +60,13 @@ namespace LaretsState
             }
         }
 
-        private IEnumerable<serviseRecord> GetCollisionRecords (serviseRecord record)
+        private IEnumerable<serviceRecord> GetCollisionRecords (serviceRecord record)
         {
             return plan.Where(r => r.serviceStart <= record.serviceStart.Add(record.serviceDuration)
                     && r.serviceStart.Add(r.serviceDuration) > record.serviceStart);
         }
 
-        public serviseRecord getNextRecord()
+        public serviceRecord getNextRecord()
         {
             DateTime nowdate = DateTime.Now;
 
@@ -78,20 +78,20 @@ namespace LaretsState
                 .First();
         }
 
-        public serviseState getActualState()
+        public serviceState getActualState()
         {
             DateTime nowDateTime = DateTime.Now;
             var recordsInProgress = plan.Where(r => r.serviceStart <= nowDateTime 
                 && r.serviceStart.Add(r.serviceDuration) > nowDateTime).Count();
 
             if (recordsInProgress >0)
-            { return serviseState.OnService; }
+            { return serviceState.OnService; }
             else
-            { return serviseState.Normal; }
+            { return serviceState.Normal; }
         }
 
     }
 
-    public enum serviseState
+    public enum serviceState
     { Normal, OnService}
 }
