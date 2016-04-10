@@ -9,7 +9,7 @@ namespace LaretsState
     public class state
     {
         private static state _Instance = null;
-        public static state Instance
+        internal static state Instance
         {  get
             {
                 if (_Instance == null) { _Instance = new state(); }
@@ -17,9 +17,14 @@ namespace LaretsState
             }
         }
 
+        public serviceRecord nextRecord
+        { get { return getNextRecord(); } }
+
+        public serviceState actualState
+        { get { return getActualState(); } }
 
         private List<serviceRecord> _plan = new List<serviceRecord>();
-        public List<serviceRecord> plan
+        internal List<serviceRecord> plan
         {
             get { return _plan; }
             private set { if (_plan != value) _plan = value; }
@@ -66,7 +71,7 @@ namespace LaretsState
                     && r.serviceStart.Add(r.serviceDuration) > record.serviceStart);
         }
 
-        public serviceRecord getNextRecord()
+        private serviceRecord getNextRecord()
         {
             DateTime nowdate = DateTime.Now;
 
@@ -78,7 +83,7 @@ namespace LaretsState
                 .First();
         }
 
-        public serviceState getActualState()
+        private  serviceState getActualState()
         {
             DateTime nowDateTime = DateTime.Now;
             var recordsInProgress = plan.Where(r => r.serviceStart <= nowDateTime 

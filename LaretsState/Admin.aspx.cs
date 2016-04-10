@@ -17,12 +17,12 @@ namespace LaretsState
 
             state actualState = (state)Application.Get("actualState");
 
-            if (actualState.getActualState() == serviceState.OnService)
+            if (actualState.actualState == serviceState.OnService)
             { StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
             else
             {
                 StateLabel.Text = "Все работает штатно.";
-                serviceRecord next = actualState.getNextRecord();
+                serviceRecord next = actualState.nextRecord;
                 if (next != null)
                 { PlanLabel.Text = "На " + next.serviceStart.ToString("dd.mm.yyyy") + " запланированы работы."; }
                 else
@@ -39,11 +39,19 @@ namespace LaretsState
             if (!Page.IsValid) return;
 
             DateTime selected = NextDate.SelectedDate;
-            string[] time = NextTime.Text.Split(':');
+            string[] starttime = NextTime.Text.Split(':');
+            string durationtime = Duration.Text;
 
-            TimeSpan duration;
+            TimeSpan duration, start;
             try
-            { duration = new TimeSpan(int.Parse(time[0]), int.Parse(time[1]), 0); }
+            { start = new TimeSpan(int.Parse(starttime[0]), int.Parse(starttime[1]), 0); }
+            catch
+            { PlanStatus.Text = "Ошибка создания даты"; return; }
+
+            selected = selected.Add(start);
+
+            try
+            { duration = new TimeSpan(0, int.Parse(durationtime), 0); }
             catch
             { PlanStatus.Text = "Ошибка создания даты"; return; }
 

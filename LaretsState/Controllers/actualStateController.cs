@@ -12,9 +12,9 @@ namespace LaretsState
         state actualstate = state.Instance;
 
         // GET api/actualState
-        public serviceState Get()
+        public state Get()
         {
-            return actualstate.getActualState();
+            return actualstate;
         }
 
         // GET api/actualState/5
