@@ -22,6 +22,15 @@ namespace LaretsState {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// ScriptManager элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager;
+        
+        /// <summary>
         /// StatePanel элемент управления.
         /// </summary>
         /// <remarks>
@@ -74,15 +83,6 @@ namespace LaretsState {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton ShowAllLinkButton;
-        
-        /// <summary>
-        /// UpdateLinkButton элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton UpdateLinkButton;
         
         /// <summary>
         /// LogOutLinkButton элемент управления.
@@ -157,6 +157,15 @@ namespace LaretsState {
         protected global::System.Web.UI.WebControls.Calendar NextDate;
         
         /// <summary>
+        /// NextTimeUpdatePanel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel NextTimeUpdatePanel;
+        
+        /// <summary>
         /// NextTime элемент управления.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,15 @@ namespace LaretsState {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator NextTimeRegularExpressionValidator;
+        
+        /// <summary>
+        /// DurationUpdatePanel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel DurationUpdatePanel;
         
         /// <summary>
         /// Duration элемент управления.
@@ -238,30 +256,21 @@ namespace LaretsState {
         protected global::System.Web.UI.WebControls.View ShowAllView;
         
         /// <summary>
-        /// GridView1 элемент управления.
+        /// ServiceRecordsDataSource элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.ObjectDataSource ServiceRecordsDataSource;
         
         /// <summary>
-        /// StateDataSource элемент управления.
+        /// GridView элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource StateDataSource;
-        
-        /// <summary>
-        /// UpdateView элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.View UpdateView;
+        protected global::System.Web.UI.WebControls.GridView GridView;
     }
 }

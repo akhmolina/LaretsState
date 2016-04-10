@@ -10,13 +10,15 @@ namespace LaretsState
 {
     public partial class Admin : System.Web.UI.Page
     {
+        public state actualState;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Application["actualState"] == null)
-            { Application["actualState"] = state.Instance; }
+            {
+                Application["actualState"] = new state(); }
 
-            state actualState = (state)Application.Get("actualState");
+            actualState = (state)Application.Get("actualState");
 
             if (actualState.actualState == serviceState.OnService)
             { StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
@@ -29,11 +31,6 @@ namespace LaretsState
                 else
                 { PlanLabel.Text = "Работы по обновлению не ведутся."; }
             }
-
-            NextDateLabel.Text = DateTime.Now.Date.ToString("dd.MM.yyyy");
-            NextDate.SelectedDate = DateTime.Now.Date;
-            NextTime.Text = DateTime.Now.ToString("HH:mm");
-            MultiView.ActiveViewIndex = 0;
         }
 
         protected void NextDate_SelectionChanged(object sender, EventArgs e)
@@ -74,7 +71,8 @@ namespace LaretsState
             }
             catch (Exception ex)
             { PlanStatus.Text = ex.Message; }
-            
+
+            Response.Redirect(Request.Path);
         }
 
 

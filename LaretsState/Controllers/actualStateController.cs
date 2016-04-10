@@ -9,7 +9,7 @@ namespace LaretsState
 {
     public class actualStateController : ApiController
     {
-        state actualstate = state.Instance;
+        state actualstate = new state();
 
         // GET api/actualState
         public state Get()

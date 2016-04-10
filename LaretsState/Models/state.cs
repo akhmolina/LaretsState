@@ -8,47 +8,44 @@ namespace LaretsState
 
     public class state
     {
-        private static state _Instance = null;
-        internal static state Instance
-        {  get
-            {
-                if (_Instance == null) { _Instance = new state(); }
-                return _Instance;
-            }
-        }
-
         public serviceRecord nextRecord
         { get { return getNextRecord(); } }
 
         public serviceState actualState
         { get { return getActualState(); } }
 
-        private List<serviceRecord> _plan = new List<serviceRecord>();
-        
+        private static List<serviceRecord> _plan = new List<serviceRecord>();
 
-        private state() { }
 
-        public IEnumerable<serviceRecord> GetAllRecords()
+        public state() { }
+
+        public List<serviceRecord> getRecords()
         {
             return _plan;
         }
 
-        public void updateRecord(serviceRecord oldRecord, serviceRecord newRecord)
+        public void updateRecord(serviceRecord record)
         {
+            serviceRecord newRecord = record;
             lock (_plan)
             {
+                serviceRecord oldRecord = _plan.Where(r=> r.id== record.id).FirstOrDefault();
+                if (oldRecord == null)
+                { throw new ArgumentException("В плане отсутствует запись с id " + record.id, "recordid"); }
+
                 var ColissionRecords = GetCollisionRecords(newRecord);
 
                 if (ColissionRecords.Count() > 1 ||
                     ColissionRecords.Count() == 1 && !ColissionRecords.Contains(oldRecord))
                 { throw new Exception("На предложенное время уже запланировано обслуживание"); }
 
-                _plan.Remove(oldRecord);
-                _plan.Add(newRecord);
+                oldRecord = newRecord;
+                //_plan.Remove(oldRecord);
+                //_plan.Add(newRecord);
             }
         }
 
-        public void deliteRecord(serviceRecord record)
+        public void deleteRecord(serviceRecord record)
         {
             _plan.Remove(record);
         }
@@ -66,10 +63,10 @@ namespace LaretsState
             }
         }
 
-        private IEnumerable<serviceRecord> GetCollisionRecords (serviceRecord record)
+        private List<serviceRecord> GetCollisionRecords (serviceRecord record)
         {
             return _plan.Where(r => r.serviceStart <= record.serviceStart.Add(record.serviceDuration)
-                    && r.serviceStart.Add(r.serviceDuration) > record.serviceStart);
+                    && r.serviceStart.Add(r.serviceDuration) > record.serviceStart).ToList();
         }
 
         private serviceRecord getNextRecord()
@@ -84,7 +81,7 @@ namespace LaretsState
                 .First();
         }
 
-        private serviceState getActualState()
+        private  serviceState getActualState()
         {
             DateTime nowDateTime = DateTime.Now;
             var recordsInProgress = _plan.Where(r => r.serviceStart <= nowDateTime 

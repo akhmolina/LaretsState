@@ -9,8 +9,8 @@ namespace LaretsState
     {
         private static int lastid = 0;
 
-        public readonly DateTime serviceStart;
-        public readonly TimeSpan serviceDuration;
+        public  DateTime serviceStart;
+        public  TimeSpan serviceDuration;
         public readonly DateTime creationTime;
         public readonly int id;
         
