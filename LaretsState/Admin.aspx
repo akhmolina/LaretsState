@@ -9,36 +9,42 @@
 </head>
 <body>
     <form id="form1" runat="server">
-     <asp:Panel ID="StatePanel" runat="server" Width="800px"  Wrap="False" CssClass="">
-        <div style="text-align: center">
-            <h1>Текущее состояние сервиса "Ларец"</h1>
 
-            <asp:Label ID="StateLabel" runat="server" OnDataBinding="Page_Load"></asp:Label>
-            <br />
-            <asp:Label ID="PlanLabel" runat="server" OnDataBinding="Page_Load"></asp:Label>
-        </div>
-    </asp:Panel>
-    <br />
-    <asp:Panel ID="NavigationPanel" runat="server" Width="800px"  Wrap="False" CssClass="">
-        <table style="text-align: center">
-            <tr>
-                <td style="width:25%; vertical-align:top">
-                    <asp:LinkButton ID="PlanLinkButton" runat="server" OnClick="PlanLinkButton_Click">Запланировать очередное обслуживание</asp:LinkButton>
-                </td>
-                <td style="width:25%; vertical-align:top">
-                    <asp:LinkButton ID="ShowAllLinkButton" runat="server" OnClick="ShowAllLinkButton_Click">Посмотреть все запланированные работы</asp:LinkButton>
-                </td >
-                <td style="width:25%; vertical-align:top">
-                    <asp:LinkButton ID="UpdateLinkButton" runat="server" OnClick="UpdateLinkButton_Click">Изменить запланированные работы</asp:LinkButton>
-                </td>
-                <td style="width:25%; vertical-align:top">
-                    <asp:LinkButton ID="LogOutLinkButton" runat="server" OnClick="LogOutLinkButton_Click">Выйти из системы</asp:LinkButton>
-                </td>
-            </tr>
-        </table>
-    </asp:Panel>
-    <br />
-    <asp:MultiView ID="MultiView" runat="server">  
+        <%-- Текущее состояние --%>
+        <asp:Panel ID="StatePanel" runat="server" Width="800px"  Wrap="False" CssClass="">
+            <div style="text-align: center">
+                <h1>Текущее состояние сервиса "Ларец"</h1>
+
+                <asp:Label ID="StateLabel" runat="server" OnDataBinding="Page_Load"></asp:Label>
+                <br />
+                <asp:Label ID="PlanLabel" runat="server" OnDataBinding="Page_Load"></asp:Label>
+            </div>
+        </asp:Panel>
+        <br />
+    
+        <%-- Навигация --%>
+        <asp:Panel ID="NavigationPanel" runat="server" Width="800px"  Wrap="False" CssClass="">
+            <table style="text-align: center">
+                <tr>
+                    <td style="width:25%; vertical-align:top">
+                        <asp:LinkButton ID="PlanLinkButton" runat="server" OnClick="PlanLinkButton_Click">Запланировать очередное обслуживание</asp:LinkButton>
+                    </td>
+                    <td style="width:25%; vertical-align:top">
+                        <asp:LinkButton ID="ShowAllLinkButton" runat="server" OnClick="ShowAllLinkButton_Click">Посмотреть все запланированные работы</asp:LinkButton>
+                    </td >
+                    <td style="width:25%; vertical-align:top">
+                        <asp:LinkButton ID="UpdateLinkButton" runat="server" OnClick="UpdateLinkButton_Click">Изменить запланированные работы</asp:LinkButton>
+                    </td>
+                    <td style="width:25%; vertical-align:top">
+                        <asp:LinkButton ID="LogOutLinkButton" runat="server" OnClick="LogOutLinkButton_Click">Выйти из системы</asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <br />
+    
+        <asp:MultiView ID="MultiView" runat="server">  
+        <%--Запланировать очередное обслуживание--%>
         <asp:View ID="PlanView" runat="server" >
             <asp:Panel ID="MainPanel" runat="server" Width="800px"  Wrap="False" CssClass="">
                 
@@ -52,8 +58,16 @@
                             Дата начала обслуживания:
                         </td>
                         <td style="height: 200px; width:70%; vertical-align:top " >
-                            <asp:Calendar ID="NextDate" runat="server"
-                            ></asp:Calendar>
+                            <div style="width:180px; border-color:#CCCCCC; border-style:solid; border-width:1px; text-align:center;">
+                                <asp:UpdatePanel ID="NextDatePanel" runat="server" >
+                                    <ContentTemplate>
+                                        <asp:label ID="NextDateLabel" runat="server" ></asp:label>
+                                        <br />
+                                        <asp:Calendar ID="NextDate" runat="server"  
+                                            OnSelectionChanged="NextDate_SelectionChanged"></asp:Calendar>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
                         </td>
                     </tr>  
                     <tr>
@@ -105,10 +119,19 @@
             </asp:Panel>
         </asp:View>
 
+        <%--Посмотреть все запланированные работы--%>
         <asp:View ID="ShowAllView" runat="server">
             <h1 style="text-align: center">Посмотреть все запланированные работы</h1>
-    
+            
+            <p style="text-align: center">
+                <asp:GridView ID="GridView1" runat="server" DataSourceID="StateDataSource">
+                </asp:GridView>
+                <asp:ObjectDataSource ID="StateDataSource" runat="server"></asp:ObjectDataSource>
+            </p>
+            
         </asp:View>
+
+        <%--Изменить запланированные работы--%>
         <asp:View ID="UpdateView" runat="server">
             <h1 style="text-align: center">Изменить запланированные работы</h1>
     

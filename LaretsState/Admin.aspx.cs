@@ -10,6 +10,7 @@ namespace LaretsState
 {
     public partial class Admin : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Application["actualState"] == null)
@@ -24,21 +25,27 @@ namespace LaretsState
                 StateLabel.Text = "Все работает штатно.";
                 serviceRecord next = actualState.nextRecord;
                 if (next != null)
-                { PlanLabel.Text = "На " + next.serviceStart.ToString("dd.mm.yyyy") + " запланированы работы."; }
+                { PlanLabel.Text = "На " + next.serviceStart.ToString("dd.MM.yyyy") + " запланированы работы."; }
                 else
                 { PlanLabel.Text = "Работы по обновлению не ведутся."; }
             }
 
+            NextDateLabel.Text = DateTime.Now.Date.ToString("dd.MM.yyyy");
             NextDate.SelectedDate = DateTime.Now.Date;
             NextTime.Text = DateTime.Now.ToString("HH:mm");
             MultiView.ActiveViewIndex = 0;
+        }
+
+        protected void NextDate_SelectionChanged(object sender, EventArgs e)
+        {
+            NextDateLabel.Text = NextDate.SelectedDate.ToString("dd.MM.yyyy");
         }
 
         protected void PlanButton_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
 
-            DateTime selected = NextDate.SelectedDate;
+            DateTime selected = NextDate.SelectedDate.Date;
             string[] starttime = NextTime.Text.Split(':');
             string durationtime = Duration.Text;
 

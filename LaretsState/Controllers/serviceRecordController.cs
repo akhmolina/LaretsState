@@ -14,13 +14,13 @@ namespace LaretsState.Controllers
         // GET: api/serviceRecord
         public IEnumerable<serviceRecord> Get()
         {
-            return actualstate.plan;
+            return actualstate.GetAllRecords();
         }
 
         // GET: api/serviceRecord/5
         public IHttpActionResult Get(int id)
         {
-            var record = actualstate.plan.FirstOrDefault((sr) => sr.id == id);
+            var record = actualstate.GetAllRecords().FirstOrDefault((sr) => sr.id == id);
             if (record == null)
             {
                 return NotFound();

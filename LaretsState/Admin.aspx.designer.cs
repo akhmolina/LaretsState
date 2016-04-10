@@ -130,6 +130,24 @@ namespace LaretsState {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
         
         /// <summary>
+        /// NextDatePanel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel NextDatePanel;
+        
+        /// <summary>
+        /// NextDateLabel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NextDateLabel;
+        
+        /// <summary>
         /// NextDate элемент управления.
         /// </summary>
         /// <remarks>
@@ -218,6 +236,24 @@ namespace LaretsState {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View ShowAllView;
+        
+        /// <summary>
+        /// GridView1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
+        
+        /// <summary>
+        /// StateDataSource элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource StateDataSource;
         
         /// <summary>
         /// UpdateView элемент управления.
