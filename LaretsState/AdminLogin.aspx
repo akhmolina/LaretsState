@@ -15,11 +15,15 @@
             <%--<asp:ValidationSummary ID="ValidationSummary" runat="server" />--%>
             <asp:Panel ID="MainPanel" runat="server" Width="500px"  Wrap="False" CssClass="">
                 <br />
-                
-                <table style="width:100%" border="0">
+                <asp:Login ID="Login1" runat="server" DestinationPageUrl="~/Admin.aspx"
+                    FailureAction="RedirectToLoginPage"
+                    ></asp:Login>
+
+                <%--<table style="width:100%" border="0">
                     <tr>
                         <td style="height: 43px; width:30%; vertical-align:top">Логин:</td>
                         <td style="height: 43px; width: 70%">
+                            
                             <asp:TextBox ID="UsernameText" runat="server" Width="80%" />
                             <asp:RequiredFieldValidator ID="UsernameRequiredValidator" runat="server"
                                 Text ="*" ErrorMessage="Введите логин" 
@@ -53,7 +57,7 @@
                 <br />
                 <asp:Button ID="LoginAction" runat="server" OnClick="LoginAction_Click" Text="Войти" />
                 <br />
-                <asp:Label ID="LoginStatus" runat="server" EnableViewState="false" Text="" Display="Static" />
+                <asp:Label ID="LoginStatus" runat="server" EnableViewState="false" Text="" Display="Static" />--%>
             </asp:Panel>
         </div>
     </form>

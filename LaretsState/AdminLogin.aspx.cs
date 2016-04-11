@@ -11,20 +11,5 @@ namespace LaretsState
 
         }
 
-        protected void LoginAction_Click(object sender, EventArgs e)
-        {
-            Page.Validate();
-            if (!Page.IsValid) return;
-
-            if (FormsAuthentication.Authenticate(UsernameText.Text, PasswordText.Text))
-            {
-                FormsAuthentication.RedirectFromLoginPage(UsernameText.Text, false);
-            }
-            else
-            {
-                LoginStatus.Text = "Неправильное имя пользователя или пароль!";
-            }
-
-        }
     }
 }

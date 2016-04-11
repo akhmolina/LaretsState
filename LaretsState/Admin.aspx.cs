@@ -14,23 +14,30 @@ namespace LaretsState
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Application["actualState"] == null)
+            if (!this.IsPostBack)
             {
-                Application["actualState"] = new state(); }
-
-            actualState = (state)Application.Get("actualState");
-
-            if (actualState.actualState == serviceState.OnService)
-            { StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
-            else
-            {
-                StateLabel.Text = "Все работает штатно.";
-                serviceRecord next = actualState.nextRecord;
-                if (next != null)
-                { PlanLabel.Text = "На " + next.serviceStart.ToString("dd.MM.yyyy") + " запланированы работы."; }
-                else
-                { PlanLabel.Text = "Работы по обновлению не ведутся."; }
+                MultiView.ActiveViewIndex = 0;
             }
+
+            if (Application["actualState"] == null)
+                {
+                    Application["actualState"] = new state();
+                }
+
+                actualState = (state)Application.Get("actualState");
+
+                if (actualState.actualState == serviceState.OnService)
+                { StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
+                else
+                {
+                    StateLabel.Text = "Все работает штатно.";
+                    serviceRecord next = actualState.nextRecord;
+                    if (next != null)
+                    { PlanLabel.Text = "На " + next.serviceStart.ToString("dd.MM.yyyy") + " запланированы работы."; }
+                    else
+                    { PlanLabel.Text = "Работы по обновлению не ведутся."; }
+                }
+            
         }
 
         protected void NextDate_SelectionChanged(object sender, EventArgs e)
