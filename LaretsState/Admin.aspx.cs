@@ -10,7 +10,7 @@ namespace LaretsState
 {
     public partial class Admin : System.Web.UI.Page
     {
-        public state actualState;
+        public actualState actualState;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,14 +19,10 @@ namespace LaretsState
                 MultiView.ActiveViewIndex = 0;
             }
 
-            if (Application["actualState"] == null)
-                {
-                    Application["actualState"] = new state();
-                }
+            actualState = state.actualState;
+            Application["actualState"] = state.actualState;
 
-                actualState = (state)Application.Get("actualState");
-
-                if (actualState.actualState == serviceState.OnService)
+            if (actualState.state == serviceState.OnService)
                 { StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }
                 else
                 {
@@ -69,11 +65,9 @@ namespace LaretsState
             if (selected < DateTime.Now)
             { PlanStatus.Text = "Выбранная плановая дата раньше сегодняшней"; return; }
 
-
-            state actualState = (state)Application.Get("actualState");
             try
             {
-                actualState.addRecord(new serviceRecord(selected, duration));
+                state.addRecord(new serviceRecord(selected, duration));
                 PlanStatus.Text = "Запись сохранена";
             }
             catch (Exception ex)

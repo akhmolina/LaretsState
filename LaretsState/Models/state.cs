@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace LaretsState
 {
 
-    public class state
+    public static class state
     {
-        public serviceRecord nextRecord
-        { get { return getNextRecord(); } }
 
-        public serviceState actualState
-        { get { return getActualState(); } }
+        public static actualState actualState
+        { get { return new actualState(getActualState(), getNextRecord()); } }
 
         private static List<serviceRecord> _plan = new List<serviceRecord>();
 
+        static state() { }
 
-        public state() { }
-
-        public List<serviceRecord> getRecords()
+        public static List<serviceRecord> getRecords()
         {
             return _plan;
         }
 
-        public void updateRecord(serviceRecord record)
+        public static void updateRecord(serviceRecord record)
         {
             serviceRecord newRecord = record;
             lock (_plan)
@@ -45,12 +41,12 @@ namespace LaretsState
             }
         }
 
-        public void deleteRecord(serviceRecord record)
+        public static void deleteRecord(serviceRecord record)
         {
             _plan.Remove(record);
         }
 
-        public void addRecord(serviceRecord record)
+        public static void addRecord(serviceRecord record)
         {
             lock (_plan)
             {
@@ -63,13 +59,13 @@ namespace LaretsState
             }
         }
 
-        private List<serviceRecord> GetCollisionRecords (serviceRecord record)
+        private static List<serviceRecord> GetCollisionRecords (serviceRecord record)
         {
             return _plan.Where(r => r.serviceStart <= record.serviceStart.Add(record.serviceDuration)
                     && r.serviceStart.Add(r.serviceDuration) > record.serviceStart).ToList();
         }
 
-        private serviceRecord getNextRecord()
+        private static serviceRecord getNextRecord()
         {
             DateTime nowdate = DateTime.Now;
 
@@ -81,7 +77,7 @@ namespace LaretsState
                 .First();
         }
 
-        private  serviceState getActualState()
+        private static serviceState getActualState()
         {
             DateTime nowDateTime = DateTime.Now;
             var recordsInProgress = _plan.Where(r => r.serviceStart <= nowDateTime 
