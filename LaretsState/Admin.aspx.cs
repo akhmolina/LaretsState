@@ -14,13 +14,13 @@ namespace LaretsState
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!this.IsPostBack)
             {
                 MultiView.ActiveViewIndex = 0;
             }
 
             actualState = state.actualState;
-            Application["actualState"] = state.actualState;
 
             if (actualState.state == serviceState.OnService)
                 { StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }

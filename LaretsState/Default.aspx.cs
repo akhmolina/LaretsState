@@ -6,7 +6,7 @@ namespace LaretsState
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            actualState actualState = (actualState)Application.Get("actualState");
+            actualState actualState = state.actualState;
 
             if (actualState != null && actualState.state == serviceState.OnService)
             {StateLabel.Text = "Сейчас сервис недоступен, ведутся технические работы."; }

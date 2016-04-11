@@ -17,12 +17,14 @@ namespace LaretsState
         [DataMember]
         public readonly int id;
         
-        public serviceRecord (DateTime ServiceStart, TimeSpan ServiceDuration)
+        public serviceRecord (DateTime serviceStart, TimeSpan serviceDuration)
         {
-            serviceStart = ServiceStart;
-            serviceDuration = ServiceDuration;
-            creationTime = DateTime.Now;
+            this.serviceStart = serviceStart;
+            this.serviceDuration = serviceDuration;
+            this.creationTime = DateTime.Now;
             this.id = ++lastid;
         }
+
+        public serviceRecord() {}
     }
 }

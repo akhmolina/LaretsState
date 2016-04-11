@@ -138,13 +138,7 @@
                     SelectMethod="getRecords" UpdateMethod="updateRecord" OldValuesParameterFormatString="original_{0}">
                 </asp:ObjectDataSource>
 
-                <asp:GridView ID="GridView" runat="server" DataSourceID="ServiceRecordsDataSource" AutoGenerateColumns="False" >
-                    <Columns>
-                        <asp:BoundField DataField="serviceStart" DataFormatString="dd.MM.yyyy hh:mm" HeaderText="Дата и время работ" />
-                        <asp:BoundField DataField="serviceDuration" DataFormatString="mm" HeaderText="Продолжительность работ (мин)" />
-                        <asp:BoundField DataField="creationTime" ReadOnly="true" DataFormatString="dd.MM.yyyy hh:mm" HeaderText="Дата и время создания" />
-                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" HeaderText="Действия" />
-                    </Columns>
+                <asp:GridView ID="GridView" runat="server" AutoGenerateColumns="False" ObjectDataSourceId ="ServiceRecordsDataSource" DataSourceID="ServiceRecordsDataSource">
                 </asp:GridView>
             </p>
             
