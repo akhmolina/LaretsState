@@ -67,7 +67,7 @@ namespace LaretsState
 
             try
             {
-                state.addRecord(new serviceRecord(selected, duration));
+                state.addRecord(selected, duration);
                 PlanStatus.Text = "Запись сохранена";
             }
             catch (Exception ex)

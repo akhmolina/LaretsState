@@ -20,36 +20,40 @@ namespace LaretsState
             return _plan;
         }
 
-        public static void updateRecord(serviceRecord record)
+        public static void updateRecord(int id, DateTime serviceStart, TimeSpan serviceDuration)
         {
-            serviceRecord newRecord = record;
+            
             lock (_plan)
             {
-                serviceRecord oldRecord = _plan.Where(r=> r.id== record.id).FirstOrDefault();
+                serviceRecord oldRecord = _plan.Where(r=> r.id== id).FirstOrDefault();
                 if (oldRecord == null)
-                { throw new ArgumentException("В плане отсутствует запись с id " + record.id, "recordid"); }
+                { throw new ArgumentException("В плане отсутствует запись с id " + id, "recordid"); }
 
+
+                serviceRecord newRecord = new serviceRecord(serviceStart, serviceDuration);
                 var ColissionRecords = GetCollisionRecords(newRecord);
-
                 if (ColissionRecords.Count() > 1 ||
                     ColissionRecords.Count() == 1 && !ColissionRecords.Contains(oldRecord))
                 { throw new Exception("На предложенное время уже запланировано обслуживание"); }
 
-                oldRecord = newRecord;
-                //_plan.Remove(oldRecord);
-                //_plan.Add(newRecord);
+                oldRecord.serviceStart = serviceStart;
+                oldRecord.serviceDuration = serviceDuration;
+                newRecord = null;
             }
         }
 
-        public static void deleteRecord(serviceRecord record)
+        public static void deleteRecord(int id)
         {
-            _plan.Remove(record);
+            serviceRecord rec = _plan.Where(r => r.id == id).FirstOrDefault();
+            if (rec!=null) _plan.Remove(rec);
         }
 
-        public static void addRecord(serviceRecord record)
+        public static void addRecord(DateTime serviceStart, TimeSpan serviceDuration)
         {
             lock (_plan)
             {
+                serviceRecord record = new serviceRecord(serviceStart, serviceDuration);
+
                 var ColissionRecords = GetCollisionRecords(record);
 
                 if (ColissionRecords.Count() > 1 )

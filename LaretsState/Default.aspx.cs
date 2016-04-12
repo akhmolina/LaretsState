@@ -20,6 +20,7 @@ namespace LaretsState
                 {PlanLabel.Text = "На " + next.serviceStart.ToString("dd.mm.yyyy") + " запланированы работы."; }
                 else
                 { PlanLabel.Text = "Работы по обновлению не ведутся."; }
+
             }
         }
     }

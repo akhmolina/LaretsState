@@ -9,8 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <asp:Panel ID="StatePanel" runat="server" Width="800px"  Wrap="False" CssClass="">
+        <asp:Panel ID="StatePanel" runat="server" Width="800px"  Wrap="False" CssClass="center" Font-Names="Segoe UI">
             <div style="text-align: center">
                 <h1 >Текущее состояние сервиса "Ларец"</h1>
                 <p>Здесь Вы можете узнать о предстоящих и текущих регламентных работах на сервисе сбыта мечт "Ларец"</p>
@@ -20,7 +19,6 @@
                 <asp:Label ID="PlanLabel" runat="server" OnDataBinding="Page_Load"></asp:Label>
             </div>
         </asp:Panel>
-    </div>
     </form>
 </body>
 </html>
